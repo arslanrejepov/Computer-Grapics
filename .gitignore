@@ -1,0 +1,9 @@
+# Visual Studio temporary files
+.vs/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.aps
+*.opendb
+*.pdb
+*.obj
