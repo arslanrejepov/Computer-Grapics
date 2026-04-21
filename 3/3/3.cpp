@@ -18,7 +18,7 @@ vectr vertices[numVertices] = {
     {-0.5, 0.5, 1}
 };
 
-float scaleFactor = 1.01f;
+float angle = 1.0f;
 
 void drawScene(void)
 {
@@ -40,7 +40,7 @@ void animate(void)
     glMatrixMode(GL_MODELVIEW);
 
     glTranslatef(0.5f, -0.5f, 0.0f);
-    glScalef(scaleFactor, scaleFactor, 1.0f);
+    glRotatef(angle, 0.0f, 0.0f, 1.0f);
     glTranslatef(-0.5f, 0.5f, 0.0f);
 
     drawScene();
@@ -70,7 +70,7 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(600, 600);
-    glutCreateWindow("Scaling around (0.5, -0.5)");
+    glutCreateWindow("Rotation around (0.5, -0.5)");
 
     init();
 
