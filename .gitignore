@@ -1,9 +1,15 @@
-# Visual Studio temporary files
+# Visual Studio user-specific files
+*.vcxproj.user
+
+# Unrelated assignment documents / screenshots
+Readme_Templet 2026.docx
+Screenshot*.png
+
+# Standard Visual Studio build and cache artifacts
 .vs/
-[Dd]ebug/
-[Rr]elease/
-*.user
-*.aps
-*.opendb
-*.pdb
-*.obj
+Debug/
+Release/
+x64/
+*.sdf
+*.suo
+*.opensdf
