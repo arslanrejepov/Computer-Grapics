@@ -132,6 +132,12 @@
     <ClInclude Include="support\irrklang\irrKlang.h">
       <Filter>support</Filter>
     </ClInclude>
+    <ClInclude Include="objects-student\composite1.h">
+      <Filter>objects-student</Filter>
+    </ClInclude>
+    <ClInclude Include="objects-student\composite2.h">
+      <Filter>objects-student</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="basicsource\main.cpp">
@@ -236,5 +242,39 @@
     <ClCompile Include="shaders\vertexshader.cpp">
       <Filter>shaders</Filter>
     </ClCompile>
+    <ClCompile Include="objects-student\composite1.cpp">
+      <Filter>objects-student</Filter>
+    </ClCompile>
+    <ClCompile Include="objects-student\composite2.cpp">
+      <Filter>objects-student</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\ground.bmp">
+      <Filter>resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\rocketBody.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\rocketFinPath.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\rocketFinProfile.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\rocketNose.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\rocketNozzle.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\star.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\tuber.txt">
+      <Filter>resources</Filter>
+    </Text>
   </ItemGroup>
 </Project>

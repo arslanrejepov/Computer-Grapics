@@ -111,6 +111,8 @@
     <ClInclude Include="objects-standard\terrain.h" />
     <ClInclude Include="objects-standard\torus.h" />
     <ClInclude Include="objects-standard\tsphere.h" />
+    <ClInclude Include="objects-student\composite1.h" />
+    <ClInclude Include="objects-student\composite2.h" />
     <ClInclude Include="support\camera.h" />
     <ClInclude Include="support\face.h" />
     <ClInclude Include="support\fog.h" />
@@ -151,6 +153,8 @@
     <ClCompile Include="objects-standard\terrain.cpp" />
     <ClCompile Include="objects-standard\torus.cpp" />
     <ClCompile Include="objects-standard\tsphere.cpp" />
+    <ClCompile Include="objects-student\composite1.cpp" />
+    <ClCompile Include="objects-student\composite2.cpp" />
     <ClCompile Include="support\camera.cpp" />
     <ClCompile Include="support\face.cpp" />
     <ClCompile Include="support\fog.cpp" />
@@ -168,6 +172,18 @@
     <ClCompile Include="shaders\Noise3DTexture.cpp" />
     <ClCompile Include="shaders\shaderprogram.cpp" />
     <ClCompile Include="shaders\vertexshader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\ground.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\rocketBody.txt" />
+    <Text Include="resources\rocketFinPath.txt" />
+    <Text Include="resources\rocketFinProfile.txt" />
+    <Text Include="resources\rocketNose.txt" />
+    <Text Include="resources\rocketNozzle.txt" />
+    <Text Include="resources\star.txt" />
+    <Text Include="resources\tuber.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

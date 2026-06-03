@@ -1,0 +1,4 @@
+﻿  scene.cpp
+  composite2.cpp
+D:\Projects\ComputerGrapichs\objects-student\composite2.cpp(69,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "prefix.h"' to your source?
+  Generating Code...

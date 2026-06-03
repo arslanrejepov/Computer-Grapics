@@ -39,7 +39,8 @@
 #include "cylinder.h"
 #include "disc.h"
 
-
+#include "composite1.h"
+#include "composite2.h"
 
 // -----------------------------------------------------------------------------------------
 // global variables
@@ -70,7 +71,8 @@ typedef vector<object3d*>::iterator shapeVectorIterator;
 // pointer of shapes defined here
 
 
-
+composite1 *rocket;
+composite2* tank;
 
 // some lights
 light *ambient, *light0, *light1, *light2;
@@ -93,7 +95,13 @@ void constructScene()
 	light1 = new light(GL_LIGHT1);
     
 	///Add 3D objects here
+	
+	rocket = new composite1();
+	tank = new composite2();
 
+	tank->setPosition(3.0f, 0.0f, 0.0f);
+
+	
 
 
 }
@@ -133,7 +141,7 @@ void resetScene()
     
 	// reset all objects to their starting position
 
-    
+    rocket->setPosition(0, 0, 0);
 }
 
 
@@ -150,7 +158,7 @@ void animateForNextFrame(float time, long frame)
 
 	////Animate 3D objects here
 
-
+	rocket->setRotation('y', time * 30);
 	
 	// eventually stop
 	if (time >= 45)
