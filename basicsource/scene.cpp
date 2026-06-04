@@ -70,7 +70,7 @@ typedef vector<object3d*>::iterator shapeVectorIterator;
 
 // pointer of shapes defined here
 
-
+plane* ground;
 composite1 *rocket;
 composite2* tank;
 
@@ -96,12 +96,19 @@ void constructScene()
     
 	///Add 3D objects here
 	
+	ground = new plane();
+	ground->setScale(150);
+	ground->setRotation('x', -90);
+	ground->setPosition(0, 0, 0);
+
+
 	rocket = new composite1();
 	tank = new composite2();
-
-	tank->setPosition(3.0f, 0.0f, 0.0f);
-
+	rocket->setPosition(15, 200, 20);  // 4.2 lifts it so bottom sits on ground
+	tank->setPosition(100, 2, 20);     // adjust to tank's half-height // 10 units right, 8 units back
 	
+	gCamera.setPosition(-20, 8, 20);
+	gCamera.setTarget(-12, 4, 0);
 
 
 }
@@ -155,10 +162,17 @@ void resetScene()
 
 void animateForNextFrame(float time, long frame)
 {
+	float rx, ry, rz;
+	rocket->getPosition(rx, ry, rz);
+
+	// Camera stays behind and above the rocket
+	gCamera.setPosition(rx - 5, ry + 3, rz + 8);
+	gCamera.setTarget(rx, ry, rz);
 
 	////Animate 3D objects here
-
 	rocket->setRotation('y', time * 30);
+
+	// Update tank animation
 	
 	// eventually stop
 	if (time >= 45)

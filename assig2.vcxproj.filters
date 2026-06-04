@@ -276,5 +276,23 @@
     <Text Include="resources\tuber.txt">
       <Filter>resources</Filter>
     </Text>
+    <Text Include="resources\tankCannon.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\tankHull.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\tankTrackPath.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\tankTrackProfile.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\tankTurret.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\tankWheel.txt">
+      <Filter>resources</Filter>
+    </Text>
   </ItemGroup>
 </Project>

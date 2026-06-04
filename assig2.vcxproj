@@ -183,6 +183,12 @@
     <Text Include="resources\rocketNose.txt" />
     <Text Include="resources\rocketNozzle.txt" />
     <Text Include="resources\star.txt" />
+    <Text Include="resources\tankCannon.txt" />
+    <Text Include="resources\tankHull.txt" />
+    <Text Include="resources\tankTrackPath.txt" />
+    <Text Include="resources\tankTrackProfile.txt" />
+    <Text Include="resources\tankTurret.txt" />
+    <Text Include="resources\tankWheel.txt" />
     <Text Include="resources\tuber.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

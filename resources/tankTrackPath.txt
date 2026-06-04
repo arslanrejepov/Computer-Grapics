@@ -1,2 +1,5 @@
-p, 0.0, 0.0
-z, 9.0
+// tankTrackPath.txt
+// Simple straight extrusion path for tank track
+p
+m 6.5
+p
