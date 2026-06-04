@@ -49,14 +49,14 @@ typedef vector<object3d*>::iterator shapeVectorIterator;
 // Phase 2: 5 -> 15 sec  rocket flies toward tank
 // Phase 3: 15 sec       impact — both hidden
 
-#define ROCKET_START_X   -20.0f
+#define ROCKET_START_X   -40.0f
 #define ROCKET_START_Y    4.2f
-#define ROCKET_START_Z    0.0f
+#define ROCKET_START_Z    -15.0f
 #define ROCKET_PEAK_Y    25.0f
 
-#define TANK_X            20.0f
-#define TANK_Y            2.0f
-#define TANK_Z            0.0f
+#define TANK_X            40.0f
+#define TANK_Y            2.5f
+#define TANK_Z           35.0f
 
 #define T_LAUNCH_END      5.0f
 #define T_IMPACT         15.0f
@@ -65,7 +65,7 @@ typedef vector<object3d*>::iterator shapeVectorIterator;
 // -----------------------------------------------------------------------------------------
 // Object pointers
 // -----------------------------------------------------------------------------------------
-plane* ground;
+plane* ground;  
 texture* groundTex;
 composite1* rocket;
 composite2* tank;
@@ -138,8 +138,8 @@ void animateForNextFrame(float time, long frame)
         float newX = speedUp(0.0f, T_IMPACT, ROCKET_START_X, TANK_X);
         float arcT = interpolate(0.0f, T_IMPACT, 0.0f, 180.0f);
         float newY = ROCKET_START_Y + ROCKET_PEAK_Y * sin_d(arcT);
-
-        rocket->setPosition(newX, newY, ROCKET_START_Z);
+        float newZ = speedUp(0.0f, T_IMPACT, ROCKET_START_Z, TANK_Z);
+        rocket->setPosition(newX, newY, newZ);
 
         float tilt = interpolate(0.0f, T_IMPACT, 0.0, -135.0);
         rocket->setRotation('y', -90, 'z', tilt);
