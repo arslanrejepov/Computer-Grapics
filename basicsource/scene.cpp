@@ -1,21 +1,11 @@
 // *****************************************************************************************
 // KXC354 - Computer Graphics & Animation - 2014
-// Assignment 1 & 2
-// 3D Engine Code
-// *****************************************************************************************
-//
-// Author: Tony Gray
-//
 // scene.cpp
+// *****************************************************************************************
 
-
-
-// -----------------------------------------------------------------------------------------
-// includes
-// -----------------------------------------------------------------------------------------
 #include "prefix.h"
-#include "constants.h"			// system-wide constants
-#include "utility.h"			// general utility functions
+#include "constants.h"
+#include "utility.h"
 #include "light.h"
 #include "camera.h"
 #include "texture.h"
@@ -25,8 +15,6 @@
 #include "fog.h"
 #include "viewfrustum.h"
 
-
-// #includes for geometry
 #include "sweep.h"
 #include "extrusion.h"
 #include "cube.h"
@@ -45,139 +33,128 @@
 // -----------------------------------------------------------------------------------------
 // global variables
 // -----------------------------------------------------------------------------------------
-extern ProgramMode		gProgramMode;							// initially, we're not animating
-
-extern cameraClass		gCamera;								// the camera
-extern object3d			*gSky;									// the global skybox
-extern fog				*gFog;									// the global fog
-extern viewfrustum		*gViewFrustum;							// the global view frustum object
-extern float			gCurrentFrameTime;						// the time that the current animation frame was started
-
+extern ProgramMode      gProgramMode;
+extern cameraClass      gCamera;
+extern object3d* gSky;
+extern fog* gFog;
+extern viewfrustum* gViewFrustum;
+extern float            gCurrentFrameTime;
 extern vector<object3d*> gShapeVector;
 typedef vector<object3d*>::iterator shapeVectorIterator;
 
+// -----------------------------------------------------------------------------------------
+// Animation timings
+// -----------------------------------------------------------------------------------------
+// Phase 1: 0 -> 5 sec   rocket rises straight up
+// Phase 2: 5 -> 15 sec  rocket flies toward tank
+// Phase 3: 15 sec       impact — both hidden
 
+#define ROCKET_START_X   -20.0f
+#define ROCKET_START_Y    4.2f
+#define ROCKET_START_Z    0.0f
+#define ROCKET_PEAK_Y    25.0f
 
+#define TANK_X            20.0f
+#define TANK_Y            2.0f
+#define TANK_Z            0.0f
 
-
+#define T_LAUNCH_END      5.0f
+#define T_IMPACT         15.0f
+#define T_END            20.0f
 
 // -----------------------------------------------------------------------------------------
-// variables that represent 3D objects being used in the animation
+// Object pointers
 // -----------------------------------------------------------------------------------------
-// these are really global variables, but you shouldn't need to access them from anywere
-// except in this file 
-// -----------------------------------------------------------------------------------------
-
-// pointer of shapes defined here
-
 plane* ground;
-composite1 *rocket;
+texture* groundTex;
+composite1* rocket;
 composite2* tank;
 
-// some lights
-light *ambient, *light0, *light1, *light2;
-
-
+light* ambient, * light0, * light1, * light2;
 
 // -----------------------------------------------------------------------------------------
 // constructScene
 // -----------------------------------------------------------------------------------------
-// This function constructs the objects required for the animation.  It is only called once
-// when the program is first run.
-// Use this to create child objects and bind them to their parents.
-// -----------------------------------------------------------------------------------------
-
 void constructScene()
 {
-	// create the lights first
-	ambient = new light(GL_LIGHT_MODEL_AMBIENT);
-	light0 = new light(GL_LIGHT0);
-	light1 = new light(GL_LIGHT1);
-    
-	///Add 3D objects here
-	
-	ground = new plane();
-	ground->setScale(150);
-	ground->setRotation('x', -90);
-	ground->setPosition(0, 0, 0);
+    ambient = new light(GL_LIGHT_MODEL_AMBIENT);
+    light0 = new light(GL_LIGHT0);
+    light1 = new light(GL_LIGHT1);
 
+    groundTex = new texture("battlefield.png");
+    ground = new plane();
+    ground->setScale(80);
+    ground->setRotation('x', -90);
+    ground->setPosition(0, 0, 0);
+    ground->setTexture(groundTex, 1, 1);  
 
-	rocket = new composite1();
-	tank = new composite2();
-	rocket->setPosition(15, 200, 20);  // 4.2 lifts it so bottom sits on ground
-	tank->setPosition(100, 2, 20);     // adjust to tank's half-height // 10 units right, 8 units back
-	
-	gCamera.setPosition(-20, 8, 20);
-	gCamera.setTarget(-12, 4, 0);
-
-
+    rocket = new composite1();
+    tank = new composite2();
 }
-
-
-
 
 // -----------------------------------------------------------------------------------------
 // resetScene
 // -----------------------------------------------------------------------------------------
-// This function is called whenever the animation is restarted.  Use it to reset objects
-// to their starting position or size, or to reset any aspects of the objects that
-// might have been altered during an animation sequence.
-// -----------------------------------------------------------------------------------------
-
 void resetScene()
 {
-	// initialise the camera
-	gCamera.setPosition(0, 6, 12);
-	gCamera.setTarget(0, 0, 0);
-    
-	ambient->setColour(0.5, 0.5, 0.5, 1.0);
-    
-	light0->turnOn();
-	light0->setPosition(-10, 10, 5);
-	light0->setColour(0.7, 0.7, 0.7, 1.0);
-	light0->setSpecularColour(0.7, 0.7, 0.7, 1.0);
-	light0->makePositional();
-	light0->setLinearAttenuation(0.1);
-	
-	light1->turnOn();
-	light1->setPosition(10, 10, -5);
-	light1->setColour(0.7, 0.7, 0.7, 1.0);
-	light1->setSpecularColour(0.7, 0.7, 0.7, 1.0);
-	light1->makePositional();
-	light1->setLinearAttenuation(0.1);
-    
-	// reset all objects to their starting position
+    ambient->setColour(0.4f, 0.4f, 0.4f, 1.0f);
 
-    rocket->setPosition(0, 0, 0);
+    light0->turnOn();
+    light0->setPosition(-10, 20, 10);
+    light0->setColour(0.8f, 0.8f, 0.8f, 1.0f);
+    light0->setSpecularColour(0.8f, 0.8f, 0.8f, 1.0f);
+    light0->makePositional();
+    light0->setLinearAttenuation(0.01f);
+
+    light1->turnOn();
+    light1->setPosition(10, 15, -10);
+    light1->setColour(0.6f, 0.6f, 0.6f, 1.0f);
+    light1->setSpecularColour(0.6f, 0.6f, 0.6f, 1.0f);
+    light1->makePositional();
+    light1->setLinearAttenuation(0.01f);
+
+    // Rocket launch pad position
+    rocket->setPosition(ROCKET_START_X, ROCKET_START_Y, ROCKET_START_Z);
+    rocket->setRotation('y', 90);
+    rocket->show();
+
+    // Tank position — faces rocket
+    tank->setPosition(TANK_X, TANK_Y, TANK_Z);
+    tank->setRotation('y', 180);
+    tank->show();
+
+    // Camera starts behind rocket
+    gCamera.setPosition(ROCKET_START_X - 10, ROCKET_START_Y + 5, ROCKET_START_Z + 15);
+    gCamera.setTarget(ROCKET_START_X, ROCKET_START_Y, ROCKET_START_Z);
 }
-
-
-
 
 // -----------------------------------------------------------------------------------------
 // animateForNextFrame
 // -----------------------------------------------------------------------------------------
-// This function is called to animate objects ready for the next frame
-// -----------------------------------------------------------------------------------------
-
 void animateForNextFrame(float time, long frame)
 {
-	float rx, ry, rz;
-	rocket->getPosition(rx, ry, rz);
+    if (time <= T_IMPACT)
+    {
+        float newX = speedUp(0.0f, T_IMPACT, ROCKET_START_X, TANK_X);
+        float arcT = interpolate(0.0f, T_IMPACT, 0.0f, 180.0f);
+        float newY = ROCKET_START_Y + ROCKET_PEAK_Y * sin_d(arcT);
 
-	// Camera stays behind and above the rocket
-	gCamera.setPosition(rx - 5, ry + 3, rz + 8);
-	gCamera.setTarget(rx, ry, rz);
+        rocket->setPosition(newX, newY, ROCKET_START_Z);
 
-	////Animate 3D objects here
-	rocket->setRotation('y', time * 30);
+        float tilt = interpolate(0.0f, T_IMPACT, 0.0, -135.0);
+        rocket->setRotation('y', -90, 'z', tilt);
+    }
+    else
+    {
+        rocket->hide();
+        tank->hide();
+    }
 
-	// Update tank animation
-	
-	// eventually stop
-	if (time >= 45)
-		gProgramMode = kpmFinished;
+    float rx, ry, rz;
+    rocket->getPosition(rx, ry, rz);
+    gCamera.setPosition(rx - 12, ry + 6, rz + 16);
+    gCamera.setTarget(rx, ry, rz);
 
+    if (time >= T_END)
+        gProgramMode = kpmFinished;
 }
-
-
