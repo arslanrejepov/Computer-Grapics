@@ -29,6 +29,8 @@
 
 #include "composite1.h"
 #include "composite2.h"
+#include "composite3.h"
+#include "composite5.h"
 
 // -----------------------------------------------------------------------------------------
 // global variables
@@ -69,6 +71,8 @@ plane* ground;
 texture* groundTex;
 composite1* rocket;
 composite2* tank;
+composite3* launcher;
+composite5* person;
 
 light* ambient, * light0, * light1, * light2;
 
@@ -83,13 +87,18 @@ void constructScene()
 
     groundTex = new texture("battlefield.png");
     ground = new plane();
-    ground->setScale(80);
+    ground->setScale(200);
     ground->setRotation('x', -90);
     ground->setPosition(0, 0, 0);
-    ground->setTexture(groundTex, 1, 1);  
+    ground->setTexture(groundTex, 4, 4);  
 
     rocket = new composite1();
     tank = new composite2();
+    launcher = new composite3();
+    person = new composite5();
+
+    launcher->setPosition(ROCKET_START_X, 0, ROCKET_START_Z);
+    person->setPosition(-35.0f, 0.5f, -15.0f);
 }
 
 // -----------------------------------------------------------------------------------------

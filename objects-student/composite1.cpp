@@ -28,14 +28,7 @@ composite1::composite1()
     nozzle->makeInsideFaces();
     nozzle->setParent(this);
 
-    // --- Bottom cap - closes the bottom ---
-    disc* bottomCap = new disc(24, 1);
-    bottomCap->setColour(0.25, 0.25, 0.28, 1.0);
-    bottomCap->setPosition(0, -4.2, 0);
-    bottomCap->setRotation('x', -90);
-    bottomCap->setScale(0.6);
-    bottomCap->makeInsideFaces();
-    bottomCap->setParent(this);
+ 
 
     // --- Fin 1 - touching body, rotated 0 deg ---
     extrusion* fin1 = new extrusion("rocketFinProfile.txt", "rocketFinPath.txt");
@@ -58,10 +51,4 @@ composite1::composite1()
     fin3->setRotation('y', 240);
     fin3->setParent(this);
 
-    // --- Round window (torus - blue) ---
-    torus* window = new torus(16, 16, 0.35, 0.08);
-    window->setColour(0.1, 0.2, 0.8, 1.0);
-    window->setPosition(0.5, 1.0, 0.0);
-    window->setRotation('z', 90);
-    window->setParent(this);
 }

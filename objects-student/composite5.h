@@ -1,18 +1,20 @@
 #pragma once
 #include "object3d.h"
 #include "cube.h"
-#include "sphere.h"
 
-// composite5 — Minecraft Person
 class composite5 : public object3d
 {
 private:
     cube* head;
+    cube* cap;
+    cube* capBrim;
     cube* body;
     cube* armL;
     cube* armR;
     cube* legL;
     cube* legR;
+    cube* bootL;
+    cube* bootR;
 
 public:
     composite5();
