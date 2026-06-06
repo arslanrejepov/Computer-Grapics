@@ -132,93 +132,81 @@ void resetScene()
     tank->show();
 
     launcher->setPosition(ROCKET_START_X, 0, ROCKET_START_Z);
-    person->setPosition(-130.0f, 0.5f, -40.0f);
-    person->setRotation('y', 0);
 
-    gCamera.setPosition(TANK_X + 20, TANK_Y + 8, TANK_Z - 20);
+    // Esger launcher-yň öňünde, tanka tarap (+X = Y rot 90)
+    person->setPosition(-130.0f, 0.5f, -40.0f);
+    person->setRotation('y', 90);
+    person->setArmAngle(0.0f);
+
+    // Kamera tankyn günbatar tarapyndan tankyna bakýar
+    gCamera.setPosition(TANK_X + 30, TANK_Y + 10, TANK_Z);
     gCamera.setTarget(TANK_X, TANK_Y, TANK_Z);
 }
 
 void animateForNextFrame(float time, long frame)
 {
     // -------------------------------------------------------
-    // PHASE 1: 0-8 sek — Kamera tankyň daşynda aýlanýar
+    // PHASE 1: 0-5s — Kamera tankyn daşynda aýlanýar
     // -------------------------------------------------------
-    if (time <= 8.0f)
+    if (time <= 5.0f)
     {
-        float angle = interpolate(0.0f, 8.0f, 0.0f, 90.0f);
-        float camX = TANK_X + 25.0f * cos_d(angle);
-        float camZ = TANK_Z - 25.0f * sin_d(angle);
+        float angle = interpolate(0.0f, 5.0f, 0.0f, 90.0f);
+        float camX = TANK_X + 30.0f * cos_d(angle);
+        float camZ = TANK_Z + 30.0f * sin_d(angle);
         gCamera.setPosition(camX, TANK_Y + 10, camZ);
         gCamera.setTarget(TANK_X, TANK_Y, TANK_Z);
     }
 
-    // -------------------------------------------------------
-    // PHASE 2: 8-15 sek — Kamera esgere geçýär, esger ýöreýär
-    // -------------------------------------------------------
-    else if (time <= 15.0f)
+    // PHASE 2: 5-8s — Kamera DERREW esgere geçýär
+    else if (time <= 8.0f)
     {
-        // Kamera esgere geçýär (smooth)
-        float camX = interpolate(8.0f, 15.0f, TANK_X + 25.0f * cos_d(90.0f), -28.0f);
-        float camZ = interpolate(8.0f, 15.0f, TANK_Z - 25.0f * sin_d(90.0f), -10.0f);
-        float camY = interpolate(8.0f, 15.0f, TANK_Y + 10, TANK_Y + 6);
+        float camX = interpolate(5.0f, 8.0f, TANK_X + 30.0f * cos_d(90.0f), -110.0f);
+        float camZ = interpolate(5.0f, 8.0f, TANK_Z + 30.0f * sin_d(90.0f), -20.0f);
+        float camY = interpolate(5.0f, 8.0f, TANK_Y + 10, 5.0f);
         gCamera.setPosition(camX, camY, camZ);
-        gCamera.setTarget(-35.0f, 2.0f, -15.0f);
 
-        // Esger öňe ýöreýär: 8-12 sek aralygynda
-        if (time <= 12.0f)
-        {
-            float personZ = interpolate(8.0f, 12.0f, -15.0f, -5.0f);
-            person->setPosition(-130.0f, 0.5f, personZ);
-        }
+        float personX = interpolate(5.0f, 8.0f, -120.0f, -130.0f);
+        person->setPosition(personX, 0.5f, -35.0f);
+        gCamera.setTarget(-130.0f, 2.0f, -35.0f);
     }
 
-    // -------------------------------------------------------
-    // PHASE 3: 15-20 sek — Esger el galdyrýar (signal)
-    // -------------------------------------------------------
-    else if (time <= 20.0f)
+    // PHASE 3: 8-13s — El animasiasy, kamera adamyň öňünde
+    else if (time <= 13.0f)
     {
-        gCamera.setPosition(-20.0f, 6.0f, -5.0f);
-        gCamera.setTarget(-35.0f, 2.0f, -5.0f);
+        // Adam +X tarapa bakýar, kamera -X tarapynda öňünde durýar
+        gCamera.setPosition(-108.0f, 3.5f, -35.0f);
+        gCamera.setTarget(-125.0f, 3.0f, -35.0f);
 
-        // El ýokardan aşak — composite5-de armAngle bar bolsa
-        float armAngle = interpolate(15.0f, 20.0f, -80.0f, 0.0f);
+        float armAngle = interpolate(8.0f, 13.0f, 0.0f, 90.0f);
         person->setArmAngle(armAngle);
     }
 
-    // -------------------------------------------------------
-    // PHASE 4: 20-45 sek — Raketa uçýar, kamera yzarlaýar
-    // -------------------------------------------------------
-    else if (time <= 45.0f)
+    // PHASE 4: 13-38s — Raketa
+    else if (time <= 38.0f)
     {
-        float t = time - 20.0f;          // 0..25
-        float dur = 25.0f;
-
-        float newX = interpolate(20.0f, 45.0f, ROCKET_START_X, TANK_X);
-        float arcAngle = interpolate(20.0f, 45.0f, 0.0f, 180.0f);
+        float newX = interpolate(13.0f, 38.0f, ROCKET_START_X, TANK_X);
+        float arcAngle = interpolate(13.0f, 38.0f, 0.0f, 180.0f);
         float newY = ROCKET_START_Y + ROCKET_PEAK_Y * sin_d(arcAngle);
-        float newZ = interpolate(20.0f, 45.0f, ROCKET_START_Z, TANK_Z);
+        float newZ = interpolate(13.0f, 38.0f, ROCKET_START_Z, TANK_Z);
         rocket->setPosition(newX, newY, newZ);
 
-        float tilt = interpolate(0.0f, 45.0f, 90.0f, -135.0f);
+        float tilt = interpolate(-20.0f,  38.0f, 90.0f, -135.0f);
         rocket->setRotation('y', -90, 'z', tilt);
 
-        // Kamera raketany yzarlaýar
         float rx, ry, rz;
         rocket->getPosition(rx, ry, rz);
-        gCamera.setPosition(rx - 12, ry + 6, rz + 16);
+        gCamera.setPosition(rx - 12, ry + 6, rz - 16);   // <-- rz - 16 (gapdaly)
         gCamera.setTarget(rx, ry, rz);
     }
 
     // -------------------------------------------------------
-    // PHASE 5: 45+ sek — Partlama, ikisi gizlenýär
+    // PHASE 5: 45s+ — Partlama, ikisi gizlenýär
     // -------------------------------------------------------
     else
     {
         rocket->hide();
         tank->hide();
 
-        // Kamera partlama ýerini görkezýär
         gCamera.setPosition(TANK_X - 15, TANK_Y + 10, TANK_Z - 20);
         gCamera.setTarget(TANK_X, TANK_Y, TANK_Z);
     }
