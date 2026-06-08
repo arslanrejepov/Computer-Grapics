@@ -138,6 +138,12 @@
     <ClInclude Include="objects-student\composite2.h">
       <Filter>objects-student</Filter>
     </ClInclude>
+    <ClInclude Include="objects-student\composite3.h">
+      <Filter>objects-student</Filter>
+    </ClInclude>
+    <ClInclude Include="objects-student\composite5.h">
+      <Filter>objects-student</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="basicsource\main.cpp">
@@ -246,6 +252,12 @@
       <Filter>objects-student</Filter>
     </ClCompile>
     <ClCompile Include="objects-student\composite2.cpp">
+      <Filter>objects-student</Filter>
+    </ClCompile>
+    <ClCompile Include="objects-student\composite3.cpp">
+      <Filter>objects-student</Filter>
+    </ClCompile>
+    <ClCompile Include="objects-student\composite5.cpp">
       <Filter>objects-student</Filter>
     </ClCompile>
   </ItemGroup>

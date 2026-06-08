@@ -15,7 +15,9 @@ private:
     cube* legR;
     cube* bootL;
     cube* bootR;
+    object3d* armRPivot;
 
 public:
     composite5();
+    void setArmAngle(float angle);
 };

@@ -113,6 +113,8 @@
     <ClInclude Include="objects-standard\tsphere.h" />
     <ClInclude Include="objects-student\composite1.h" />
     <ClInclude Include="objects-student\composite2.h" />
+    <ClInclude Include="objects-student\composite3.h" />
+    <ClInclude Include="objects-student\composite5.h" />
     <ClInclude Include="support\camera.h" />
     <ClInclude Include="support\face.h" />
     <ClInclude Include="support\fog.h" />
@@ -155,6 +157,8 @@
     <ClCompile Include="objects-standard\tsphere.cpp" />
     <ClCompile Include="objects-student\composite1.cpp" />
     <ClCompile Include="objects-student\composite2.cpp" />
+    <ClCompile Include="objects-student\composite3.cpp" />
+    <ClCompile Include="objects-student\composite5.cpp" />
     <ClCompile Include="support\camera.cpp" />
     <ClCompile Include="support\face.cpp" />
     <ClCompile Include="support\fog.cpp" />
