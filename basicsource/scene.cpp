@@ -53,7 +53,7 @@ typedef vector<object3d*>::iterator shapeVectorIterator;
 
 #define ROCKET_START_X   -130.0f
 #define ROCKET_START_Y    4.2f
-#define ROCKET_START_Z    -35.0f
+#define ROCKET_START_Z    50.0f
 #define ROCKET_PEAK_Y    25.0f
 
 #define TANK_X            100.0f
@@ -133,8 +133,10 @@ void resetScene()
     launcher->setPosition(ROCKET_START_X, 0, ROCKET_START_Z);
 
     // Kamera tankyn günbatar tarapyndan tankyna bakýar
-    gCamera.setPosition(TANK_X - 20, TANK_Y + 20, TANK_Z + 3);
-    gCamera.setTarget(TANK_X, TANK_Y, TANK_Z);
+    //gCamera.setPosition(TANK_X - 20, TANK_Y + 20, TANK_Z + 3);
+    gCamera.setPosition(-128, TANK_Y + 20, TANK_Z + 3);
+    //gCamera.setTarget(TANK_X, TANK_Y, TANK_Z);
+    gCamera.setTarget(ROCKET_START_X, ROCKET_START_Y, ROCKET_START_Z);
 }
 
 void animateForNextFrame(float time, long frame)
