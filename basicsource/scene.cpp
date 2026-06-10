@@ -67,12 +67,11 @@ typedef vector<object3d*>::iterator shapeVectorIterator;
 // -----------------------------------------------------------------------------------------
 // Object pointers
 // -----------------------------------------------------------------------------------------
-plane* ground; 
+plane* ground;
 texture* groundTex;
 composite1* rocket;
 composite2* tank;
 composite3* launcher;
-composite5* person;
 
 light* ambient, * light0, * light1, * light2;
 
@@ -90,13 +89,12 @@ void constructScene()
     ground->setScale(500);
     ground->setRotation('x', -90);
     ground->setPosition(0, 0, 0);
-    ground->setTexture(groundTex, 4, 4);  
+    ground->setTexture(groundTex, 4, 4);
 
- 
+
     rocket = new composite1();
     tank = new composite2();
     launcher = new composite3();
-    person = new composite5();
 
     launcher->setPosition(ROCKET_START_X, 0, ROCKET_START_Z);
 }
@@ -132,11 +130,9 @@ void resetScene()
 
     launcher->setPosition(ROCKET_START_X, 0, ROCKET_START_Z);
 
-    // Kamera tankyn günbatar tarapyndan tankyna bakýar
-    //gCamera.setPosition(TANK_X - 20, TANK_Y + 20, TANK_Z + 3);
-    gCamera.setPosition(-128, TANK_Y + 20, TANK_Z + 3);
-    //gCamera.setTarget(TANK_X, TANK_Y, TANK_Z);
-    gCamera.setTarget(ROCKET_START_X, ROCKET_START_Y, ROCKET_START_Z);
+
+    gCamera.setPosition(7, TANK_Y + 17, TANK_Z + 3);
+    gCamera.setTarget(TANK_X, TANK_Y, TANK_Z);
 }
 
 void animateForNextFrame(float time, long frame)
@@ -162,8 +158,8 @@ void animateForNextFrame(float time, long frame)
         tank->setPosition(TANK_X, TANK_Y, TANK_Z);
 
         // Kamera gönüden esger pozisiýasyna geçýär
-        gCamera.setPosition(-130.0f, 7.0f, -50.0f);
-        gCamera.setTarget(-130.0f, 2.0f, -35.0f);
+        gCamera.setPosition(-140.0f, 20.0f, 50.0f);
+        gCamera.setTarget(-130.0f, 7.0f, 50.0f);
     }
 
     // -------------------------------------------------------
@@ -171,18 +167,8 @@ void animateForNextFrame(float time, long frame)
     // -------------------------------------------------------
     else if (time <= 13.0f)
     {
-        // Esger 8-10s aralygynda gelýär (Z boyunca ýakynlaşýar)
-        float personX = smoothAcceleration(8.0f, 2.5f, 1.5f, -200.0f, -125.0f);
-        person->setPosition(personX - 7, 0.5f, -35.0f);
-        person->setRotation('y', 90);
-
-        // 10-13s: el ýokardanrak aşaga (90->0 dereje: öňe tarap aşak)
-        float armAngle = interpolate(10.0f, 13.0f, 90.0f, 0.0f);
-        person->setArmAngle(armAngle);
-
-        // Kamera esger öňünde durýar
-        gCamera.setPosition(-140.0f, 20.0f, -50.0f);
-        gCamera.setTarget(-130.0f, 2.0f, -35.0f);
+        gCamera.setPosition(ROCKET_START_X - 18.0f, ROCKET_START_Y + 7.0f, ROCKET_START_Z + 2.0f);
+        gCamera.setTarget(ROCKET_START_X + 5.0f, ROCKET_START_Y, ROCKET_START_Z);
     }
 
     // -------------------------------------------------------
@@ -190,6 +176,7 @@ void animateForNextFrame(float time, long frame)
     // -------------------------------------------------------
     else if (time <= 38.0f)
     {
+        rocket->show();
         float newX = interpolate(13.0f, 38.0f, ROCKET_START_X, TANK_X);
         float arcAngle = interpolate(13.0f, 38.0f, 0.0f, 180.0f);
         float newY = ROCKET_START_Y + ROCKET_PEAK_Y * sin_d(arcAngle);
@@ -204,7 +191,7 @@ void animateForNextFrame(float time, long frame)
 
         // Kamera raketanyň ARKA tarapynda — başlangyç tarapa (−X tarap)
         // Raketa +X tarapa uçýar, şonuň üçin arka = −X tarap
-        gCamera.setPosition(rx - 18.0f, ry + 3.0f, rz);
+        gCamera.setPosition(rx - 18.0f, ry + 7.0f, rz + 2.0f);
         gCamera.setTarget(rx + 5.0f, ry, rz);
     }
 
