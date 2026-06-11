@@ -83,7 +83,7 @@ void constructScene()
     ambient = new light(GL_LIGHT_MODEL_AMBIENT);
     light0 = new light(GL_LIGHT0);
     light1 = new light(GL_LIGHT1);
-
+    gSky = new skybox("sky14-");
     groundTex = new texture("battlefield.png");
     ground = new plane();
     ground->setScale(500);
@@ -93,7 +93,10 @@ void constructScene()
 
 
     rocket = new composite1();
+	rocket->setBodyTexture(new texture("rocket.png"));
     tank = new composite2();
+	tank->setBodyTexture(new texture("tankhull.png"));
+	tank->setTurretTexture(new texture("tanktorret.png"));
     launcher = new composite3();
 
     launcher->setPosition(ROCKET_START_X, 0, ROCKET_START_Z);

@@ -144,6 +144,16 @@
     <ClInclude Include="objects-student\composite5.h">
       <Filter>objects-student</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="objects-student\tcube.h">
+      <Filter>objects-student</Filter>
+    </ClInclude>
+    <ClInclude Include="objects-student\fin.h">
+      <Filter>objects-student</Filter>
+    </ClInclude>
+    <ClInclude Include="objects-student\pyramid.h">
+      <Filter>objects-student</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="basicsource\main.cpp">
@@ -260,9 +270,48 @@
     <ClCompile Include="objects-student\composite5.cpp">
       <Filter>objects-student</Filter>
     </ClCompile>
+    <ClCompile Include="objects-student\tcube.cpp">
+      <Filter>objects-student</Filter>
+    </ClCompile>
+    <ClCompile Include="objects-student\fin.cpp">
+      <Filter>objects-student</Filter>
+    </ClCompile>
+    <ClCompile Include="objects-student\pyramid.cpp">
+      <Filter>objects-student</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\ground.bmp">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\sky.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\sky14-1.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\sky14-2.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\sky14-3.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\sky14-4.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\sky14-5.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\sky14-6.jpg">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\rocket.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\tankhull.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\tanktorret.png">
       <Filter>resources</Filter>
     </Image>
   </ItemGroup>
@@ -306,5 +355,8 @@
     <Text Include="resources\tankWheel.txt">
       <Filter>resources</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="assig2.rc" />
   </ItemGroup>
 </Project>

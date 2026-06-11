@@ -106,68 +106,68 @@ void tcube::privateDraw(bool drawMode)
 	
 	// front face -
 	glNormal3fv(faces[0].faceNormal.data);
-	glTexCoord2f(0.0,0.5);
+	glTexCoord2f(0.0,1.0);
 	glVertex3fv(vertices[0].coordinate.data);		// top left
 	glTexCoord2f(0.0,0.0);
 	glVertex3fv(vertices[3].coordinate.data);		// bottom left
-	glTexCoord2f(0.25,0.0);
+	glTexCoord2f(1.0,0.0);
 	glVertex3fv(vertices[2].coordinate.data);		// bottom right
-	glTexCoord2f(0.25,0.5);
+	glTexCoord2f(1.0,1.0);
 	glVertex3fv(vertices[1].coordinate.data);		// top right
 	
 	// right face
 	glNormal3fv(faces[1].faceNormal.data);
-	glTexCoord2f(0.25, 0.5);
+	glTexCoord2f(0.0, 1.0);
 	glVertex3fv(vertices[1].coordinate.data);		// top left
-	glTexCoord2f(0.25, 0.0);
+	glTexCoord2f(0.0, 0.0);
 	glVertex3fv(vertices[2].coordinate.data);		// bottom left
-	glTexCoord2f(0.5, 0.0);
+	glTexCoord2f(1.0, 0.0);
 	glVertex3fv(vertices[6].coordinate.data);		// bottom right
-	glTexCoord2f(0.5, 0.5);
+	glTexCoord2f(1.0, 1.0);
 	glVertex3fv(vertices[5].coordinate.data);		// top right
 	
 	// back face
 	glNormal3fv(faces[2].faceNormal.data);
-	glTexCoord2f(0.5, 0.5);
+	glTexCoord2f(0.0, 1.0);
 	glVertex3fv(vertices[5].coordinate.data);		// top left
-	glTexCoord2f(0.5, 0.0);
+	glTexCoord2f(0.0, 0.0);
 	glVertex3fv(vertices[6].coordinate.data);		// bottom left
-	glTexCoord2f(0.75, 0.0);
+	glTexCoord2f(1.0, 0.0);
 	glVertex3fv(vertices[7].coordinate.data);		// bottom right
-	glTexCoord2f(0.75, 0.5);
+	glTexCoord2f(1.0, 1.0);
 	glVertex3fv(vertices[4].coordinate.data);		// top right
     
 	// left face
 	glNormal3fv(faces[3].faceNormal.data);
-	glTexCoord2f(0.75, 0.5);
+	glTexCoord2f(0.0, 1.0);
 	glVertex3fv(vertices[4].coordinate.data);		// top left
-	glTexCoord2f(0.75, 0.0);
+	glTexCoord2f(0.0, 0.0);
 	glVertex3fv(vertices[7].coordinate.data);		// bottom left
 	glTexCoord2f(1.0, 0.0);
 	glVertex3fv(vertices[3].coordinate.data);		// bottom right
-	glTexCoord2f(1.0, 0.5);
+	glTexCoord2f(1.0, 1.0);
 	glVertex3fv(vertices[0].coordinate.data);		// top right
 	
 	// top face
 	glNormal3fv(faces[4].faceNormal.data);
-	glTexCoord2f(0.25, 1.0);
+	glTexCoord2f(0.0, 1.0);
 	glVertex3fv(vertices[0].coordinate.data);		// bottom (front) left
-	glTexCoord2f(0.25, 0.5);
+	glTexCoord2f(0.0, 0.0);
 	glVertex3fv(vertices[1].coordinate.data);		// bottom (front) right
-	glTexCoord2f(0.5, 0.5);
+	glTexCoord2f(1.0, 0.0);
 	glVertex3fv(vertices[5].coordinate.data);		// top (back) right
-	glTexCoord2f(0.5, 1.0);
+	glTexCoord2f(1.0, 1.0);
 	glVertex3fv(vertices[4].coordinate.data);		// top (back) left
 	
 	// bottom face
 	glNormal3fv(faces[5].faceNormal.data);
 	glTexCoord2f(0.0, 1.0);
 	glVertex3fv(vertices[3].coordinate.data);		// top (front) left
-	glTexCoord2f(0.0, 0.5);
+	glTexCoord2f(0.0, 0.0);
 	glVertex3fv(vertices[7].coordinate.data);		// bottom (back) left
-	glTexCoord2f(0.25, 0.5);
+	glTexCoord2f(1.0, 0.0);
 	glVertex3fv(vertices[6].coordinate.data);		// bottom (back) right
-	glTexCoord2f(0.25, 1.0);
+	glTexCoord2f(1.0, 1.0);
 	glVertex3fv(vertices[2].coordinate.data);		// top (front) right
 	
 	glEnd();
