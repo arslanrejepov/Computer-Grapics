@@ -154,6 +154,9 @@
     <ClInclude Include="objects-student\pyramid.h">
       <Filter>objects-student</Filter>
     </ClInclude>
+    <ClInclude Include="objects-student\firesys.h">
+      <Filter>objects-student</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="basicsource\main.cpp">
@@ -279,6 +282,9 @@
     <ClCompile Include="objects-student\pyramid.cpp">
       <Filter>objects-student</Filter>
     </ClCompile>
+    <ClCompile Include="objects-student\firesys.cpp">
+      <Filter>objects-student</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\ground.bmp">
@@ -312,6 +318,9 @@
       <Filter>resources</Filter>
     </Image>
     <Image Include="resources\tanktorret.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\flames.png">
       <Filter>resources</Filter>
     </Image>
   </ItemGroup>

@@ -116,6 +116,7 @@
     <ClInclude Include="objects-student\composite3.h" />
     <ClInclude Include="objects-student\composite5.h" />
     <ClInclude Include="objects-student\fin.h" />
+    <ClInclude Include="objects-student\firesys.h" />
     <ClInclude Include="objects-student\pyramid.h" />
     <ClInclude Include="objects-student\tcube.h" />
     <ClInclude Include="resource.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="objects-student\composite3.cpp" />
     <ClCompile Include="objects-student\composite5.cpp" />
     <ClCompile Include="objects-student\fin.cpp" />
+    <ClCompile Include="objects-student\firesys.cpp" />
     <ClCompile Include="objects-student\pyramid.cpp" />
     <ClCompile Include="objects-student\tcube.cpp" />
     <ClCompile Include="support\camera.cpp" />
@@ -185,6 +187,7 @@
     <ClCompile Include="shaders\vertexshader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\flames.png" />
     <Image Include="resources\ground.bmp" />
     <Image Include="resources\rocket.png" />
     <Image Include="resources\sky.jpg" />

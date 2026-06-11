@@ -31,7 +31,7 @@
 #include "composite2.h"
 #include "composite3.h"
 #include "composite5.h"
-
+#include "firesys.h"
 // -----------------------------------------------------------------------------------------
 // global variables
 // -----------------------------------------------------------------------------------------
@@ -72,6 +72,7 @@ texture* groundTex;
 composite1* rocket;
 composite2* tank;
 composite3* launcher;
+firesys* fire;
 
 light* ambient, * light0, * light1, * light2;
 
@@ -100,6 +101,10 @@ void constructScene()
     launcher = new composite3();
 
     launcher->setPosition(ROCKET_START_X, 0, ROCKET_START_Z);
+
+    fire = new firesys(100);
+    fire->setParent(tank);
+	//fire->setPosition(TANK_X, TANK_Y + 3, TANK_Z);
 }
 
 // -----------------------------------------------------------------------------------------
@@ -205,6 +210,7 @@ void animateForNextFrame(float time, long frame)
     {
         rocket->hide();
         tank->hide();
+		fire->animate();
 
         gCamera.setPosition(TANK_X - 15, TANK_Y + 10, TANK_Z - 20);
         gCamera.setTarget(TANK_X, TANK_Y, TANK_Z);
