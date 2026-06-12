@@ -368,4 +368,9 @@
   <ItemGroup>
     <ResourceCompile Include="assig2.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\sound1.wav">
+      <Filter>resources</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

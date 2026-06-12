@@ -1,4 +1,0 @@
-// rocketFinPath.txt - thin extrusion along Z
-p
-m 0.1
-p

@@ -73,6 +73,7 @@ composite1* rocket;
 composite2* tank;
 composite3* launcher;
 firesys* fire;
+snd* bgMusic;
 
 light* ambient, * light0, * light1, * light2;
 
@@ -103,8 +104,8 @@ void constructScene()
     launcher->setPosition(ROCKET_START_X, 0, ROCKET_START_Z);
 
     fire = new firesys(100);
-    fire->setParent(tank);
-	//fire->setPosition(TANK_X, TANK_Y + 3, TANK_Z);
+    fire->setPosition(0, 3, 0);  // tank-yň üstünde
+    bgMusic = new snd("sound1.wav");
 }
 
 // -----------------------------------------------------------------------------------------
@@ -127,7 +128,8 @@ void resetScene()
     light1->setSpecularColour(0.6f, 0.6f, 0.6f, 1.0f);
     light1->makePositional();
     light1->setLinearAttenuation(0.01f);
-
+    bgMusic->stopSound();
+    bgMusic->setPlayPoint(0.0);
     rocket->setPosition(ROCKET_START_X, ROCKET_START_Y, ROCKET_START_Z);
     rocket->setRotation('y', 90);
     rocket->show();
@@ -135,7 +137,7 @@ void resetScene()
     tank->setPosition(TANK_X, TANK_Y, TANK_Z);
     tank->setRotation('y', 180);
     tank->show();
-
+    fire->setPosition(TANK_X, TANK_Y + 3.0f, TANK_Z + 40.0f);
     launcher->setPosition(ROCKET_START_X, 0, ROCKET_START_Z);
 
 
@@ -145,77 +147,90 @@ void resetScene()
 
 void animateForNextFrame(float time, long frame)
 {
+    // SAZ
+    if (time > 0.0f && time < 0.1f)
+        bgMusic->startSound();
+    if (time >= 38.0f)
+        bgMusic->stopSound();
+
     // -------------------------------------------------------
-    // PHASE 1: 0-5s — Tank öňe-yza hereket edýär, kamera tankda
+    // PHASE 1: 0-10s — Tank öňe ýöreýär, kamera garşy tarapda
     // -------------------------------------------------------
-    if (time <= 5.0f)
+    if (time <= 10.0f)
     {
-        float tankZ = interpolate(0.0f, 5.0f, TANK_Z, TANK_Z + 20.0f);
+        float tankZ = interpolate(0.0f, 10.0f, TANK_Z, TANK_Z + 40.0f);
         tank->setPosition(TANK_X, TANK_Y, tankZ);
 
-        gCamera.setPosition(TANK_X - 20, TANK_Y + 5, TANK_Z + 11);
-        gCamera.setTarget(TANK_X, TANK_Y, TANK_Z);
+        // Kamera tankyn öň tarapynda (garşylykly)
+        gCamera.setPosition(TANK_X - 25.0f, TANK_Y + 8.0f, tankZ + 50.0f);
+        gCamera.setTarget(TANK_X, TANK_Y, tankZ);
     }
-
     // -------------------------------------------------------
-    // PHASE 2: 5-8s — Kamera gönüden esgere geçýär (süýşme ýok)
+    // PHASE 2: 10-16s — Kamera launcher görkezýär
     // -------------------------------------------------------
-    else if (time <= 8.0f)
+    else if (time <= 16.0f)
     {
-        // Tank yzyna gaýdýar
-        tank->setPosition(TANK_X, TANK_Y, TANK_Z);
+        tank->setPosition(TANK_X, TANK_Y, TANK_Z + 40.0f);
 
-        // Kamera gönüden esger pozisiýasyna geçýär
-        gCamera.setPosition(-140.0f, 20.0f, 50.0f);
-        gCamera.setTarget(-130.0f, 7.0f, 50.0f);
+        gCamera.setPosition(ROCKET_START_X - 15.0f, ROCKET_START_Y + 8.0f, ROCKET_START_Z + 5.0f);
+        gCamera.setTarget(ROCKET_START_X + 5.0f, ROCKET_START_Y + 3.0f, ROCKET_START_Z);
     }
-
     // -------------------------------------------------------
-    // PHASE 3: 8-13s — Esger gelýär, el animasiýasy, raketa atylýar
+    // PHASE 3: 16-32s — Raketa uçýar
     // -------------------------------------------------------
-    else if (time <= 13.0f)
-    {
-        gCamera.setPosition(ROCKET_START_X - 18.0f, ROCKET_START_Y + 7.0f, ROCKET_START_Z + 2.0f);
-        gCamera.setTarget(ROCKET_START_X + 5.0f, ROCKET_START_Y, ROCKET_START_Z);
-    }
-
-    // -------------------------------------------------------
-    // PHASE 4: 13-38s — Raketa uçýar, kamera arka tarapynda
-    // -------------------------------------------------------
-    else if (time <= 38.0f)
+    else if (time <= 32.0f)
     {
         rocket->show();
-        float newX = interpolate(13.0f, 38.0f, ROCKET_START_X, TANK_X);
-        float arcAngle = interpolate(13.0f, 38.0f, 0.0f, 180.0f);
+
+        float t = time - 16.0f;
+
+        float progress;
+        if (t <= 12.0f)
+            progress = (t / 16.0f) * 0.7f;
+        else
+            progress = 0.7f + ((t - 12.0f) / 4.0f) * 0.3f;
+
+        float newX = ROCKET_START_X + progress * (TANK_X - ROCKET_START_X);
+        float newZ = ROCKET_START_Z + progress * (TANK_Z + 40.0f - ROCKET_START_Z);
+        float arcAngle = progress * 180.0f;
         float newY = ROCKET_START_Y + ROCKET_PEAK_Y * sin_d(arcAngle);
-        float newZ = interpolate(13.0f, 38.0f, ROCKET_START_Z, TANK_Z);
+
         rocket->setPosition(newX, newY, newZ);
 
-        float tilt = interpolate(13.0f, 38.0f, -45.0f, -115.0f);
+        float tilt = interpolate(16.0f, 32.0f, -45.0f, -120.0f);
         rocket->setRotation('y', -90, 'z', tilt);
 
         float rx, ry, rz;
         rocket->getPosition(rx, ry, rz);
+        gCamera.setPosition(rx - 15.0f, ry + 6.0f, rz + 5.0f);
+        gCamera.setTarget(rx + 8.0f, ry - 2.0f, rz);
 
-        // Kamera raketanyň ARKA tarapynda — başlangyç tarapa (−X tarap)
-        // Raketa +X tarapa uçýar, şonuň üçin arka = −X tarap
-        gCamera.setPosition(rx - 18.0f, ry + 7.0f, rz + 2.0f);
-        gCamera.setTarget(rx + 5.0f, ry, rz);
+        if (time >= 31.8f)
+            rocket->hide();
     }
-
     // -------------------------------------------------------
-    // PHASE 5: 38s+ — Partlama
+    // PHASE 4: 32-38s — Raketa degdi, tank + raketa yitya, ot galya
     // -------------------------------------------------------
-    else
+    else if (time <= 38.0f)
     {
         rocket->hide();
         tank->hide();
-		fire->animate();
+        fire->show();
+        fire->animate();
 
-        gCamera.setPosition(TANK_X - 15, TANK_Y + 10, TANK_Z - 20);
-        gCamera.setTarget(TANK_X, TANK_Y, TANK_Z);
+        gCamera.setPosition(TANK_X - 20.0f, TANK_Y + 8.0f, TANK_Z + 40.0f);
+        gCamera.setTarget(TANK_X, TANK_Y + 3.0f, TANK_Z + 40.0f);
+    }
+    // -------------------------------------------------------
+    // PHASE 5: 38s+ — Gutarýar
+    // -------------------------------------------------------
+    else
+    {
+        fire->animate();
+        gCamera.setPosition(TANK_X - 20.0f, TANK_Y + 8.0f, TANK_Z + 40.0f);
+        gCamera.setTarget(TANK_X, TANK_Y + 3.0f, TANK_Z + 40.0f);
     }
 
-    if (time >= 50.0f)
+    if (time >= 38.0f)
         gProgramMode = kpmFinished;
 }

@@ -7,6 +7,7 @@
 #include "tcube.h"
 #include "fin.h"
 #include "pyramid.h"
+#include "utility.h"
 
 class composite1 : public object3d
 {

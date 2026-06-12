@@ -91,6 +91,7 @@ void composite1::setBodyTexture(texture* t)
 
 void composite1::setLightAngle(float angle)
 {
-    antennaTipL->setRotation('x', angle);
-    antennaTipR->setRotation('x', angle);
+    float r = 0.2f;
+    antennaTipL->setPosition(0.15f + r * cos_d(angle), 2.0f + r * sin_d(angle), 0.65f);
+    antennaTipR->setPosition(-0.15f + r * cos_d(angle), 2.0f + r * sin_d(angle), 0.65f);
 }
