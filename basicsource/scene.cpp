@@ -32,6 +32,7 @@
 #include "composite3.h"
 #include "composite5.h"
 #include "firesys.h"
+#include "forest.h"
 // -----------------------------------------------------------------------------------------
 // global variables
 // -----------------------------------------------------------------------------------------
@@ -106,6 +107,9 @@ void constructScene()
     fire = new firesys(100);
     fire->setPosition(0, 3, 0);  // tank-yň üstünde
     bgMusic = new snd("sound1.wav");
+
+    forest* trees = new forest(300);
+    trees->show();
 }
 
 // -----------------------------------------------------------------------------------------
