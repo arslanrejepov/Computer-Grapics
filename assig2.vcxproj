@@ -189,6 +189,7 @@
     <ClCompile Include="shaders\vertexshader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\battlefield.png" />
     <Image Include="resources\flames.png" />
     <Image Include="resources\ground.bmp" />
     <Image Include="resources\rocket.png" />

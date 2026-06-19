@@ -44,6 +44,18 @@ composite2::composite2()
         wheelR[i]->setRotation('z', 90.0f);
         wheelR[i]->setPosition(4.05f, wheelY, wheelZ[i]);
         wheelR[i]->setParent(this);
+
+        discL[i] = new cube();
+        discL[i]->setColour(0.8f, 0.8f, 0.8f, 1.0f);
+        discL[i]->setDeformation(0.12f, 0.1f, 0.35f);
+        discL[i]->setPosition(-4.05f, wheelY, wheelZ[i]);
+        discL[i]->setParent(this);
+
+        discR[i] = new cube();
+        discR[i]->setColour(0.8f, 0.8f, 0.8f, 1.0f);
+        discR[i]->setDeformation(0.12f, 0.1f, 0.35f);
+        discR[i]->setPosition(4.05f, wheelY, wheelZ[i]);
+        discR[i]->setParent(this);
     }
 
 
@@ -84,6 +96,8 @@ void composite2::hide()
     {
         wheelL[i]->hide();
         wheelR[i]->hide();
+        discL[i]->hide();
+        discR[i]->hide();
     }
 }
 
@@ -100,6 +114,8 @@ void composite2::show()
     {
         wheelL[i]->show();
         wheelR[i]->show();
+        discL[i]->show();
+        discR[i]->show();
     }
 }
 
@@ -107,6 +123,13 @@ void composite2::setBodyTexture(texture* t)
 {
     hull->setTexture(t);
 }
-void composite2::setTurretRotation(float x, float z) {
-    turret->setRotation('x', x, 'z', z);
+void composite2::setWheelAngle(float angle)
+{
+    for (int i = 0; i < 3; i++)
+    {
+        wheelL[i]->setRotation('z', 90.0f, 'x', -angle);
+        wheelR[i]->setRotation('z', 90.0f, 'x', -angle);
+        discL[i]->setRotation('x', -angle);
+        discR[i]->setRotation('x', -angle);
+    }
 }

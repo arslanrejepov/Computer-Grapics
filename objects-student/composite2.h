@@ -6,6 +6,7 @@
 #include "sweep.h"
 #include "extrusion.h"
 #include "torus.h"
+#include "cube.h"
 
 class composite2 : public object3d
 {
@@ -18,6 +19,8 @@ private:
     extrusion* trackL;
     extrusion* trackR;
     tcube* turretHead;
+    cube* discL[3];
+    cube* discR[3];
 
 public:
     composite2();
@@ -26,7 +29,7 @@ public:
     virtual void show();
 
     void setBodyTexture(texture* t);
-    void setTurretRotation(float x, float z);
+    void setWheelAngle(float angle);
     void setTurretTexture(texture* t) { turret->setTexture(t); }
 };
 

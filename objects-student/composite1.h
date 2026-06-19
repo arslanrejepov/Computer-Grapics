@@ -13,11 +13,10 @@ class composite1 : public object3d
 {
 public:
     composite1();
-    void setSensorAngle(float angle);
     virtual void hide();
     virtual void show();
     void setBodyTexture(texture* t);
-    void setLightAngle(float angle);
+    void setSpinAngle(float angle);
 private:
     fin* fins[4];
     pyramid* s_nose;

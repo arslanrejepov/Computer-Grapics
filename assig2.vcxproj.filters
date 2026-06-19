@@ -332,6 +332,9 @@
     <Image Include="resources\tree.tga">
       <Filter>resources</Filter>
     </Image>
+    <Image Include="resources\battlefield.png">
+      <Filter>resources</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\rocketBody.txt">
