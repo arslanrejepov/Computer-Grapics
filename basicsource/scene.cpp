@@ -77,7 +77,7 @@ firesys* fire;
 snd* bgMusic;
 
 light* ambient, * light0, * light1, * light2;
-
+    
 // -----------------------------------------------------------------------------------------
 // constructScene
 // -----------------------------------------------------------------------------------------
@@ -164,9 +164,9 @@ void animateForNextFrame(float time, long frame)
     {
         float tankZ = interpolate(0.0f, 10.0f, TANK_Z, TANK_Z + 40.0f);
         tank->setPosition(TANK_X, TANK_Y, tankZ);
-
+        tank->setWheelAngle(time * 120.0f);
         // Kamera tankyn öň tarapynda (garşylykly)
-        gCamera.setPosition(TANK_X - 25.0f, TANK_Y + 8.0f, tankZ + 50.0f);
+        gCamera.setPosition(TANK_X - 25.0f, TANK_Y + 8.0f, tankZ + 20.0f);
         gCamera.setTarget(TANK_X, TANK_Y, tankZ);
     }
     // -------------------------------------------------------
@@ -200,9 +200,10 @@ void animateForNextFrame(float time, long frame)
         float newY = ROCKET_START_Y + ROCKET_PEAK_Y * sin_d(arcAngle);
 
         rocket->setPosition(newX, newY, newZ);
-
         float tilt = interpolate(16.0f, 32.0f, -45.0f, -120.0f);
+        float spin = time * 180.0f;
         rocket->setRotation('y', -90, 'z', tilt);
+        rocket->setSpinAngle(spin);
 
         float rx, ry, rz;
         rocket->getPosition(rx, ry, rz);

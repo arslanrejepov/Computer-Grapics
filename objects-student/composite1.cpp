@@ -91,5 +91,7 @@ void composite1::setBodyTexture(texture* t)
 
 void composite1::setSpinAngle(float angle)
 {
-    setRotation('y', angle);
+    s_body->setRotation('y', angle);
+    s_nose->setRotation('y', angle);
+    s_nozzle->setRotation('y', angle);
 }
