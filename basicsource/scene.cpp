@@ -30,7 +30,6 @@
 #include "composite1.h"
 #include "composite2.h"
 #include "composite3.h"
-#include "composite5.h"
 #include "firesys.h"
 #include "forest.h"
 // -----------------------------------------------------------------------------------------
@@ -45,12 +44,6 @@ extern float            gCurrentFrameTime;
 extern vector<object3d*> gShapeVector;
 typedef vector<object3d*>::iterator shapeVectorIterator;
 
-// -----------------------------------------------------------------------------------------
-// Animation timings
-// -----------------------------------------------------------------------------------------
-// Phase 1: 0 -> 5 sec   rocket rises straight up
-// Phase 2: 5 -> 15 sec  rocket flies toward tank
-// Phase 3: 15 sec       impact — both hidden
 
 #define ROCKET_START_X   -130.0f
 #define ROCKET_START_Y    4.2f
@@ -151,27 +144,22 @@ void resetScene()
 
 void animateForNextFrame(float time, long frame)
 {
-    // SAZ
+    
     if (time > 0.0f && time < 0.1f)
         bgMusic->startSound();
     if (time >= 38.0f)
         bgMusic->stopSound();
 
-    // -------------------------------------------------------
-    // PHASE 1: 0-10s — Tank öňe ýöreýär, kamera garşy tarapda
-    // -------------------------------------------------------
+    // PHASE 1: 0-10s — Tank öňe ýöreýär
     if (time <= 10.0f)
     {
         float tankZ = interpolate(0.0f, 10.0f, TANK_Z, TANK_Z + 40.0f);
         tank->setPosition(TANK_X, TANK_Y, tankZ);
         tank->setWheelAngle(time * 120.0f);
-        // Kamera tankyn öň tarapynda (garşylykly)
         gCamera.setPosition(TANK_X - 25.0f, TANK_Y + 8.0f, tankZ + 20.0f);
         gCamera.setTarget(TANK_X, TANK_Y, tankZ);
     }
-    // -------------------------------------------------------
     // PHASE 2: 10-16s — Kamera launcher görkezýär
-    // -------------------------------------------------------
     else if (time <= 16.0f)
     {
         tank->setPosition(TANK_X, TANK_Y, TANK_Z + 40.0f);
@@ -179,9 +167,7 @@ void animateForNextFrame(float time, long frame)
         gCamera.setPosition(ROCKET_START_X - 15.0f, ROCKET_START_Y + 8.0f, ROCKET_START_Z + 5.0f);
         gCamera.setTarget(ROCKET_START_X + 5.0f, ROCKET_START_Y + 3.0f, ROCKET_START_Z);
     }
-    // -------------------------------------------------------
     // PHASE 3: 16-32s — Raketa uçýar
-    // -------------------------------------------------------
     else if (time <= 32.0f)
     {
         rocket->show();
@@ -213,9 +199,7 @@ void animateForNextFrame(float time, long frame)
         if (time >= 31.8f)
             rocket->hide();
     }
-    // -------------------------------------------------------
     // PHASE 4: 32-38s — Raketa degdi, tank + raketa yitya, ot galya
-    // -------------------------------------------------------
     else if (time <= 38.0f)
     {
         rocket->hide();
@@ -226,9 +210,7 @@ void animateForNextFrame(float time, long frame)
         gCamera.setPosition(TANK_X - 20.0f, TANK_Y + 8.0f, TANK_Z + 40.0f);
         gCamera.setTarget(TANK_X, TANK_Y + 3.0f, TANK_Z + 40.0f);
     }
-    // -------------------------------------------------------
     // PHASE 5: 38s+ — Gutarýar
-    // -------------------------------------------------------
     else
     {
         fire->animate();

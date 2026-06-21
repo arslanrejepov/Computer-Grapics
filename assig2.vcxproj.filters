@@ -141,9 +141,6 @@
     <ClInclude Include="objects-student\composite3.h">
       <Filter>objects-student</Filter>
     </ClInclude>
-    <ClInclude Include="objects-student\composite5.h">
-      <Filter>objects-student</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="objects-student\tcube.h">
       <Filter>objects-student</Filter>
@@ -273,9 +270,6 @@
     <ClCompile Include="objects-student\composite3.cpp">
       <Filter>objects-student</Filter>
     </ClCompile>
-    <ClCompile Include="objects-student\composite5.cpp">
-      <Filter>objects-student</Filter>
-    </ClCompile>
     <ClCompile Include="objects-student\tcube.cpp">
       <Filter>objects-student</Filter>
     </ClCompile>
@@ -337,18 +331,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="resources\rocketBody.txt">
-      <Filter>resources</Filter>
-    </Text>
-    <Text Include="resources\rocketFinPath.txt">
-      <Filter>resources</Filter>
-    </Text>
-    <Text Include="resources\rocketFinProfile.txt">
-      <Filter>resources</Filter>
-    </Text>
-    <Text Include="resources\rocketNose.txt">
-      <Filter>resources</Filter>
-    </Text>
     <Text Include="resources\rocketNozzle.txt">
       <Filter>resources</Filter>
     </Text>
@@ -361,19 +343,16 @@
     <Text Include="resources\tankCannon.txt">
       <Filter>resources</Filter>
     </Text>
-    <Text Include="resources\tankHull.txt">
-      <Filter>resources</Filter>
-    </Text>
     <Text Include="resources\tankTrackPath.txt">
       <Filter>resources</Filter>
     </Text>
     <Text Include="resources\tankTrackProfile.txt">
       <Filter>resources</Filter>
     </Text>
-    <Text Include="resources\tankTurret.txt">
+    <Text Include="resources\antennaPath.txt">
       <Filter>resources</Filter>
     </Text>
-    <Text Include="resources\tankWheel.txt">
+    <Text Include="resources\antennaProfile.txt">
       <Filter>resources</Filter>
     </Text>
   </ItemGroup>

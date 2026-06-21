@@ -1,43 +1,17 @@
-// *****************************************************************************************
-// KXC354 - Computer Graphics & Animation - 2014
-// Assignment 1 & 2
-// 3D Engine Code
-// *****************************************************************************************
-//
-// Author: Tony Gray
-//
-// cube.cpp
-//
-// This file defines the class for cube objects
-
-
-
-// -----------------------------------------------------------------------------------------
-// includes
-// -----------------------------------------------------------------------------------------
 #include "prefix.h"
 #include "fin.h"
 #include "utility.h"
 
 
-
-// -----------------------------------------------------------------------------------------
-// globals
-// -----------------------------------------------------------------------------------------
 extern vector<object3d*> gShapeVector;
 
-
-
-// -----------------------------------------------------------------------------------------
-// constructor
-// -----------------------------------------------------------------------------------------
 
 fin::fin()
 {
     setName("fin");
     setColour(0.15, 0.85, 0.35, 1.0);
 
-    // 4 vertices for a triangular prism
+    
     vertexCount = 6;
     faceCount = 5;
     polygonCount = 5;
@@ -45,12 +19,12 @@ fin::fin()
     vertices.resize(vertexCount);
     faces.resize(faceCount);
 
-    // Front triangle
+    
     vertices[0].set(-1.0f, 1.0f, 1.0f);
     vertices[1].set(-1.0f, -1.0f, 1.0f);
     vertices[2].set(1.0f, -1.0f, 1.0f);
 
-    // Back triangle (same shape, pushed back)
+    
     vertices[3].set(-1.0f, 1.0f, -0.5f);
     vertices[4].set(-1.0f, -1.0f, -0.5f);
     vertices[5].set(1.0f, -1.0f, -0.5f);

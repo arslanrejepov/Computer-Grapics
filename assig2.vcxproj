@@ -114,7 +114,6 @@
     <ClInclude Include="objects-student\composite1.h" />
     <ClInclude Include="objects-student\composite2.h" />
     <ClInclude Include="objects-student\composite3.h" />
-    <ClInclude Include="objects-student\composite5.h" />
     <ClInclude Include="objects-student\fin.h" />
     <ClInclude Include="objects-student\firesys.h" />
     <ClInclude Include="objects-student\forest.h" />
@@ -164,7 +163,6 @@
     <ClCompile Include="objects-student\composite1.cpp" />
     <ClCompile Include="objects-student\composite2.cpp" />
     <ClCompile Include="objects-student\composite3.cpp" />
-    <ClCompile Include="objects-student\composite5.cpp" />
     <ClCompile Include="objects-student\fin.cpp" />
     <ClCompile Include="objects-student\firesys.cpp" />
     <ClCompile Include="objects-student\forest.cpp" />
@@ -205,18 +203,13 @@
     <Image Include="resources\tree.tga" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="resources\rocketBody.txt" />
-    <Text Include="resources\rocketFinPath.txt" />
-    <Text Include="resources\rocketFinProfile.txt" />
-    <Text Include="resources\rocketNose.txt" />
+    <Text Include="resources\antennaPath.txt" />
+    <Text Include="resources\antennaProfile.txt" />
     <Text Include="resources\rocketNozzle.txt" />
     <Text Include="resources\star.txt" />
     <Text Include="resources\tankCannon.txt" />
-    <Text Include="resources\tankHull.txt" />
     <Text Include="resources\tankTrackPath.txt" />
     <Text Include="resources\tankTrackProfile.txt" />
-    <Text Include="resources\tankTurret.txt" />
-    <Text Include="resources\tankWheel.txt" />
     <Text Include="resources\tuber.txt" />
   </ItemGroup>
   <ItemGroup>

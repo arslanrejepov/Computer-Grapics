@@ -1,2 +1,0 @@
-# Computer-Grapics
-Computer Graphics

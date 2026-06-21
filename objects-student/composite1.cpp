@@ -43,6 +43,12 @@ composite1::composite1()
     fins[3]->setRotation('y', 180);
     fins[3]->setPosition(-0.95, -3.0, 0.0);
 
+    antenna = new extrusion("antennaProfile.txt", "antennaPath.txt");
+    antenna->setParent(s_body);
+    antenna->setColour(0.1, 0.1, 0.1, 1.0);
+    antenna->setRotation('y', 360);
+    antenna->setPosition(0.0, 2.0, 0.65);
+
     antennaTipL = new sphere(8);
     antennaTipL->setParent(s_body);
     antennaTipL->setColour(0.9, 0.1, 0.1, 1.0);
@@ -68,7 +74,8 @@ void composite1::hide()
     fins[2]->hide();
     fins[3]->hide();
 	antennaTipL->hide();
-	antennaTipR->hide();    
+	antennaTipR->hide(); 
+	antenna->hide();
 }
 
 void composite1::show()
@@ -81,6 +88,7 @@ void composite1::show()
     fins[1]->show();
     fins[2]->show();
     fins[3]->show();
+	antenna->show();
 }
 
 
@@ -92,6 +100,4 @@ void composite1::setBodyTexture(texture* t)
 void composite1::setSpinAngle(float angle)
 {
     s_body->setRotation('y', angle);
-    s_nose->setRotation('y', angle);
-    s_nozzle->setRotation('y', angle);
 }

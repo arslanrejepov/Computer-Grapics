@@ -430,6 +430,12 @@ void drawScene(void)
 		drawText (tempString.str(), 10, 20);
 	}
 
+	showCopyright(
+		"2026",
+		"Arslan Rejebov",
+		"Arslan Rejebov",
+		"Computer Graphics Project"
+	);
 
 	glutSwapBuffers();
 

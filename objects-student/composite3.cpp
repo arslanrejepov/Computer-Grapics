@@ -1,4 +1,3 @@
-// composite3.cpp — Rocket Launcher
 #include "prefix.h"
 #include "composite3.h"
 #include "utility.h"
@@ -9,7 +8,6 @@ composite3::composite3()
 {
     setName("launcher");
 
-    // --- Base platform ---
     base = new cube();
     base->setColour(0.30f, 0.30f, 0.30f, 1.0f);
     base->setDeformation(2.5f, 0.3f, 2.5f);
