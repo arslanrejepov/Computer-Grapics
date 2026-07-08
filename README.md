@@ -5,7 +5,7 @@ A Computer Graphics course project developed in **C++** using **Visual Studio**.
 ## Demo
 
 <p align="center">
-  <img src="gif.gif" alt="Project Demo" width="800">
+  <img src="demo.gif" alt="Project Demo" width="800">
 </p>
 
 ## Requirements
